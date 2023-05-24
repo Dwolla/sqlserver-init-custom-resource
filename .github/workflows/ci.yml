@@ -23,7 +23,7 @@ jobs:
         os:
           - ubuntu-latest
         scala:
-          - 2.13.8
+          - 2.13.10
         java:
           - temurin@11
         database:

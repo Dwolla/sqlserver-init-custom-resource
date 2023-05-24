@@ -2,13 +2,13 @@ ThisBuild / organization := "com.dwolla"
 ThisBuild / description := "CloudFormation custom resource to initialize a Sql Server database with a new user"
 ThisBuild / homepage := Some(url("https://github.com/Dwolla/sqlserver-init-custom-resource"))
 ThisBuild / licenses += ("MIT", url("https://opensource.org/licenses/MIT"))
-ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / scalaVersion := "2.13.10"
 ThisBuild / scalacOptions += "-Ymacro-annotations"
 ThisBuild / developers := List(
   Developer(
-    "bpholt",
-    "Brian Holt",
-    "bholt+sqlserver-init-custom-resource@dwolla.com",
+    "csutton",
+    "Caleb Sutton",
+    "csutton+sqlserver-init-custom-resource@dwolla.com",
     url("https://dwolla.com")
   ),
 )
@@ -17,7 +17,6 @@ ThisBuild / libraryDependencies ++= Seq(
   compilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full),
   compilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
 )
-ThisBuild / resolvers += Resolver.sonatypeRepo("snapshots")
 
 lazy val `sqlserver-init-custom-resource` = (project in file("."))
   .settings(
@@ -28,13 +27,13 @@ lazy val `sqlserver-init-custom-resource` = (project in file("."))
       val feralVersion = "0.1.0-M9"
       val doobieVersion = "1.0.0-RC2"
       val munitVersion = "0.7.29"
-      val circeVersion = "0.14.2"
+      val circeVersion = "0.14.5"
       val scalacheckEffectVersion = "1.0.4"
-      val log4catsVersion = "2.3.1"
+      val log4catsVersion = "2.6.0"
       val monocleVersion = "2.1.0"
-      val http4sVersion = "0.23.12"
-      val awsSdkVersion = "2.17.190"
-      val refinedV = "0.9.29"
+      val http4sVersion = "0.23.19"
+      val awsSdkVersion = "2.20.71"
+      val refinedV = "0.10.3"
       val catsRetryVersion = "3.1.0"
 
       Seq(
@@ -50,16 +49,16 @@ lazy val `sqlserver-init-custom-resource` = (project in file("."))
         "io.estatico" %% "newtype" % "0.4.4",
         "org.typelevel" %% "log4cats-slf4j" % log4catsVersion,
         "com.amazonaws" % "aws-lambda-java-log4j2" % "1.5.1" % Runtime,
-        "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.17.2" % Runtime,
-        "com.chuusai" %% "shapeless" % "2.3.9",
+        "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.20.0" % Runtime,
+        "com.chuusai" %% "shapeless" % "2.3.10",
         "com.dwolla" %% "fs2-aws-java-sdk2" % "3.0.0-RC1",
         "software.amazon.awssdk" % "secretsmanager" % awsSdkVersion,
         "org.tpolecat" %% "doobie-core" % doobieVersion,
         "org.tpolecat" %% "doobie-refined" % doobieVersion,
         "com.microsoft.sqlserver" % "mssql-jdbc" % "12.2.0.jre11" % Runtime,
-        "com.ovoenergy" %% "natchez-extras-doobie" % "6.1.0",
+        "com.ovoenergy" %% "natchez-extras-doobie" % "7.0.0",
         "com.github.cb372" %% "cats-retry" % catsRetryVersion,
-        "org.typelevel" %% "cats-parse" % "0.3.7",
+        "org.typelevel" %% "cats-parse" % "0.3.9",
         "org.scalameta" %% "munit" % munitVersion % Test,
         "org.scalameta" %% "munit-scalacheck" % munitVersion % Test,
         "io.circe" %% "circe-literal" % circeVersion % Test,
@@ -72,10 +71,10 @@ lazy val `sqlserver-init-custom-resource` = (project in file("."))
         "com.github.julien-truffaut" %% "monocle-core" % monocleVersion % Test,
         "com.github.julien-truffaut" %% "monocle-macro" % monocleVersion % Test,
         "org.http4s" %% "http4s-dsl" % http4sVersion % Test,
-        "com.eed3si9n.expecty" %% "expecty" % "0.15.4" % Test,
+        "com.eed3si9n.expecty" %% "expecty" % "0.16.0" % Test,
         "software.amazon.awssdk" % "sts" % awsSdkVersion % Test,
         "eu.timepit" %% "refined-scalacheck" % refinedV % Test,
-        "org.typelevel" %% "cats-laws" % "2.7.0" % Test,
+        "org.typelevel" %% "cats-laws" % "2.9.0" % Test,
         "org.typelevel" %% "discipline-munit" % "1.0.9" % Test,
       )
     },

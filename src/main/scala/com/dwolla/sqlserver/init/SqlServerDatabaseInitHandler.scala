@@ -9,6 +9,7 @@ import com.dwolla.tracing._
 import doobie.util.log.LogHandler
 import feral.lambda.cloudformation._
 import feral.lambda.{INothing, IOLambda, KernelSource, LambdaEnv, TracedHandler}
+import fs2.io.net.Network
 import natchez._
 import natchez.http4s.NatchezMiddleware
 import natchez.noop.NoopSpan
@@ -24,12 +25,12 @@ class SqlServerDatabaseInitHandler extends IOLambda[CloudFormationCustomResource
     new SqlServerDatabaseInitHandlerF[IO].handler
 }
 
-class SqlServerDatabaseInitHandlerF[F[_] : Async](implicit logHandler: LogHandler) {
+class SqlServerDatabaseInitHandlerF[F[_] : Async : Network](implicit logHandler: LogHandler) {
   def handler: Resource[F, LambdaEnv[F, CloudFormationCustomResourceRequest[DatabaseMetadata]] => F[Option[INothing]]] =
     for {
       implicit0(logger: Logger[F]) <- Resource.eval(Slf4jLogger.create[F])
       implicit0(random: Random[F]) <- Resource.eval(Random.scalaUtilRandom[F])
-      implicit0(dispatcher: Dispatcher[Kleisli[F, Span[F], *]]) <- Dispatcher[Kleisli[F, Span[F], *]].mapK(Kleisli.applyK(NoopSpan()))
+      implicit0(dispatcher: Dispatcher[Kleisli[F, Span[F], *]]) <- Dispatcher.sequential[Kleisli[F, Span[F], *]].mapK(Kleisli.applyK(NoopSpan()))
       client <- httpClient
       entryPoint <- XRayEnvironment[Resource[F, *]].daemonAddress.flatMap {
         case Some(addr) => XRay.entryPoint(addr)

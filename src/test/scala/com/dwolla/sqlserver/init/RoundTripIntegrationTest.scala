@@ -46,7 +46,7 @@ class RoundTripIntegrationTest
 
   override def munitTimeout: Duration = 10.minutes
 
-  private def genResources[F[_] : Monad, A](max: Int = 10)
+  private def genResources[F[_], A](max: Int = 10)
                                            (implicit R: Arbitrary[Resource[F, A]]): Gen[Resource[F, List[A]]] =
     for {
       size <- Gen.chooseNum(0, max)

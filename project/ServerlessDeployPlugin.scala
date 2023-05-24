@@ -41,10 +41,10 @@ object ServerlessDeployPlugin extends AutoPlugin {
   object Stage {
     val parser: Parser[Stage] =
       token(Stage.Sandbox.parser) |
-        token(Stage.DevInt.parser) |
-        token(Stage.Uat.parser) |
-        token(Stage.Prod.parser) |
-        token(Stage.Admin.parser)
+      token(Stage.DevInt.parser) |
+      token(Stage.Uat.parser) |
+      token(Stage.Prod.parser) |
+      token(Stage.Admin.parser)
 
     case object Sandbox extends Stage("Sandbox")
     case object DevInt extends Stage("DevInt")
