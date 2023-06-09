@@ -1,0 +1,27 @@
+queue_rules:
+  - name: default
+    conditions:
+      - status-success=Build and Test (ubuntu-latest, 2.13.10, temurin@11, mcr.microsoft.com/azure-sql-edge:latest)
+
+pull_request_rules:
+  - name: assign and label scala-steward's PRs
+    conditions:
+      - author=dwolla-oss-scala-steward[bot]
+    actions:
+      label:
+        add: [dependency-update]
+  - name: automatic update pull requests
+    conditions:
+      - author=dwolla-oss-scala-steward[bot]
+      - -conflict # skip PRs with conflicts
+      - -draft # filter-out GH draft PRs
+    actions:
+      update:
+  - name: merge scala-steward's PRs
+    conditions:
+      - author=dwolla-oss-scala-steward[bot]
+      - status-success=Build and Test (ubuntu-latest, 2.13.10, temurin@11, mcr.microsoft.com/azure-sql-edge:latest)
+    actions:
+      queue:
+        method: squash
+        name: default
