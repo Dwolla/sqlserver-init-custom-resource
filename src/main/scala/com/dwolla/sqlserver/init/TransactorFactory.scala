@@ -26,7 +26,7 @@ object TransactorFactory {
 
   private def sqlserverConnectionUrl(host: Host,
                                    port: Port,
-                                   trustServerCert: Boolean): String =
-    s"jdbc:sqlserver://$host:$port;encrypt=true;trustServerCertificate=${trustServerCert}"
+                                   trustServerCert: TrustServerCert): String =
+    s"jdbc:sqlserver://$host:$port;encrypt=true;trustServerCertificate=$trustServerCert"
 
 }

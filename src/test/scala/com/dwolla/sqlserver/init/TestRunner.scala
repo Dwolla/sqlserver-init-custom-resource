@@ -41,7 +41,7 @@ object TestRunner extends IOApp {
             MasterDatabaseUsername("sa"),
             MasterDatabasePassword("Password123"),
             List.empty,
-            trustServerCert = true,
+            TrustServerCert("true"),
           ),
           None
         )
