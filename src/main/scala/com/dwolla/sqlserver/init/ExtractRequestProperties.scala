@@ -12,7 +12,7 @@ case class DatabaseMetadata(host: Host,
                             username: MasterDatabaseUsername,
                             password: MasterDatabasePassword,
                             secretIds: List[SecretId],
-                            trustServerCert: Boolean,
+                            trustServerCert: TrustServerCert,
                            )
 
 object DatabaseMetadata {

@@ -84,7 +84,8 @@ class RoundTripIntegrationTest
 
         genResources[F, SecretId]()
       }
-    } yield secrets.map(DatabaseMetadata(host, port, database, username, password, _, trustServerCert = true))
+      trustServerCert <- Gen.const(TrustServerCert("true"))
+    } yield secrets.map(DatabaseMetadata(host, port, database, username, password, _, trustServerCert))
   }
 
   /**

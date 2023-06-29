@@ -52,6 +52,7 @@ package object init {
 
   @newtype case class Host(value: String)
   @newtype case class Port(value: Int)
+  @newtype case class TrustServerCert(value: String)
 
   @newtype case class Username(id: SqlServerUser) {
     def value: String = id.value

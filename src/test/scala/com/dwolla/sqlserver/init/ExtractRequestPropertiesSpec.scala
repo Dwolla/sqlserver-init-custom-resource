@@ -19,7 +19,7 @@ class ExtractRequestPropertiesSpec extends munit.FunSuite {
                  "secret1",
                  "secret2"
                ],
-               "TrustServerCert": false
+               "TrustServerCert": "false"
              }"""
 
     assertEquals(
@@ -31,7 +31,7 @@ class ExtractRequestPropertiesSpec extends munit.FunSuite {
         MasterDatabaseUsername("masterdb"),
         MasterDatabasePassword("master-pass"),
         List("secret1", "secret2").map(SecretId(_)),
-        false,
+        TrustServerCert("false"),
       ))
     )
 
